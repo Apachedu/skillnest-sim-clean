@@ -1,0 +1,718 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+.page-wrap { max-width: 1080px; margin: 24px auto; padding: 0 16px; }
+.back-link { color: #6b7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 12px 0;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+.answer-box {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+  resize: vertical;
+  font: inherit;
+}
+.answer-box:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,.15); }
+
+.btn {
+  background: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.btn:disabled { opacity: .6; cursor: default; }
+
+.pill {
+  font-size: 12px;
+  color: #111827;
+  background: #fde68a;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.no-select { user-select: none; }
+
+/* blur until submit */
+.blur-protect {
+  filter: blur(5px);
+  user-select: none;
+  pointer-events: none;
+}
+/* ──────────────────────────────────────────────
+   SkillNestEdu: Branding + Anti-Copy Utilities
+   Append below your existing styles
+────────────────────────────────────────────── */
+
+/* 1) Site-wide selection lock (inputs still allowed) */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  user-select: text !important;
+}
+
+/* 2) Image drag/save deterrent */
+img, svg {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+
+/* 3) Watermark + screenshot deterrent utilities */
+.skn-watermark {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 200px;
+  height: 200px;
+  opacity: 0.12;            /* tweak visibility */
+  pointer-events: none;
+  z-index: 40;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: contain;
+}
+
+/* Diagonal tiled logo (optional, super subtle) */
+.skn-bg-logo {
+  position: fixed;
+  inset: 0;
+  background-repeat: repeat;
+  background-size: 600px auto;
+  background-position: center;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Faint diagonal text overlay (optional) */
+.skn-screenshot-overlay::before {
+  content: "SkillNestEdu • © All Rights Reserved • You Matter";
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.075;
+  white-space: nowrap;
+  font-size: 48px;
+  font-weight: 700;
+  transform: rotate(-25deg);
+  display: grid;
+  place-items: center;
+  mix-blend-mode: multiply;
+}
+
+/* 4) Utility you already use */
+.no-select { user-select: none; }
+
+/* 5) (Optional) Stronger blur gate for “view after submit” areas */
+.blur-protect-strong {
+  filter: blur(8px) saturate(0.7) brightness(1.05);
+}
+
+/* 6) Mobile safe area so fixed overlays don’t sit under notches */
+@supports (padding: max(0px)) {
+  body { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
+}
+/* Brand palette */
+:root {
+  --ink: #111827;         /* near-black */
+  --muted: #6b7280;       /* slate */
+  --card: #ffffff;
+  --ring: #e5e7eb;
+  --accent: #6366f1;      /* indigo */
+  --accent-soft: #eef2ff; /* indigo-50 */
+}
+
+/* Headings polish */
+h1,h2,h3,h4 { color: var(--ink); }
+h1 { font-size: 2.2rem; letter-spacing: -0.02em; }
+h2 { font-size: 1.4rem; margin: 0 0 8px; }
+h3 { font-size: 1.1rem; margin: 0 0 8px; }
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--ring);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+.pill { background: var(--accent-soft); color: var(--ink); }
+
+/* Optional hero image styling */
+.case-hero {
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 1px solid var(--ring);
+}
+.case-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: .96;
+}
+/* ───────── SkillNestEdu Theme Layer ───────── */
+:root {
+  --bg: #f7f9fc;
+  --ink: #0f172a;         /* near-black */
+  --muted: #64748b;       /* slate-500 */
+  --card: #ffffff;
+  --ring: #e5e7eb;
+  --brand: #6366f1;       /* indigo-500 */
+  --brand-600: #4f46e5;   /* indigo-600 */
+  --brand-50: #eef2ff;    /* indigo-50 */
+  --sky: #0ea5e9;         /* sky-500 */
+  --success: #16a34a;     /* green-600 */
+  --warn: #f59e0b;        /* amber-500 */
+}
+
+body {
+  background:
+    radial-gradient(1200px 500px at -10% -10%, #e0f2fe55, transparent 60%),
+    radial-gradient(1000px 700px at 110% -20%, #e0e7ff66, transparent 50%),
+    var(--bg);
+  color: var(--ink);
+}
+
+/* Links */
+a { color: var(--brand); }
+a:hover { color: var(--brand-600); }
+
+/* Headings */
+h1,h2,h3,h4 { color: var(--ink); }
+.brand-heading {
+  background: linear-gradient(90deg, var(--brand-600), var(--sky));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Cards + hover */
+.card {
+  background: var(--card);
+  border: 1px solid var(--ring);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  transition: box-shadow 120ms ease, transform 120ms ease;
+}
+.card:hover { box-shadow: 0 6px 16px rgba(17,24,39,.08); transform: translateY(-2px); }
+
+/* Buttons (keep your .btn, add variants) */
+.btn { background: #111827; color: #fff; }
+.btn-primary {
+  background: var(--brand-600);
+  color: #fff;
+  border: 1px solid transparent;
+}
+.btn-primary:hover { filter: brightness(0.95); }
+.btn-outline {
+  background: #f3f4f6;
+  color: var(--ink);
+  border: 1px solid var(--ring);
+}
+
+/* Pills/Chips */
+.pill { background: var(--brand-50); color: var(--ink); }
+.pill-success { background: #dcfce7; color: #065f46; }
+.pill-warn { background: #fef3c7; color: #92400e; }
+
+/* Tabs */
+.tabs { display:flex; gap:8px; flex-wrap:wrap; }
+.tab {
+  padding: 8px 12px; border-radius: 999px; cursor:pointer;
+  border: 1px solid var(--ring); background:#f3f4f6; color: var(--ink);
+}
+.tab-active { background: var(--brand-600); color:#fff; border-color: transparent; }
+
+/* Home banner */
+.brand-hero {
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding: 18px;
+  border-radius: 16px;
+  color:#fff;
+  background: linear-gradient(105deg, var(--brand-600), var(--sky));
+  box-shadow: 0 6px 20px rgba(79,70,229,.18);
+  margin-bottom: 16px;
+}
+.brand-hero p { margin: 6px 0 0; color:#eaf2ff; }
+
+/* Case hero image */
+.case-hero { border-radius:16px; overflow:hidden; border:1px solid var(--ring); margin-bottom:16px; }
+.case-hero img { display:block; width:100%; height:auto; }
+
+/* Subtle section labels */
+.meta { color: var(--muted); }
+
+/* ───────── SkillNestEdu Site Look (purple/blue gradient, soft cards) ───────── */
+:root {
+  --ink: #0f172a;               /* near-black */
+  --muted: #64748b;             /* slate-500 */
+  --bg: #fbfcff;                /* soft white */
+  --ring: #e5e7eb;
+  --card: #ffffff;
+  --brand-start: #7c3aed;       /* purple */
+  --brand-end: #22d3ee;         /* cyan */
+  --brand-mid: #8b5cf6;         /* violet-500 */
+}
+
+body {
+  background:
+    radial-gradient(700px 400px at 20% 0%, #fce7f388, transparent 60%),
+    radial-gradient(800px 500px at 80% 0%, #dbeafe88, transparent 60%),
+    var(--bg);
+  color: var(--ink);
+}
+
+/* Hero heading (like your site) */
+.section-hero { margin: 6px 0 18px; text-align: center; }
+.section-hero h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 8px; color: #6d28d9; }
+.section-hero p { margin: 0 auto 14px; color: var(--muted); max-width: 60ch; }
+.section-underline { width: 100%; height: 6px; border-radius: 999px; background: linear-gradient(90deg, var(--brand-start), var(--brand-end)); margin: 0 auto 10px; }
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--ring);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 18px rgba(17,24,39,.06);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(17,24,39,.10); }
+
+/* Thumbnails in cards */
+.card-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 14px; border: 1px solid var(--ring); margin-bottom: 12px; background: #fafafa; }
+.card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Chips & tabs */
+.pill { font-size: 12px; color: var(--ink); background: #eef2ff; border-radius: 999px; padding: 4px 10px; }
+.pill-green { background: #dcfce7; color: #065f46; }
+.pill-cyan  { background: #cffafe; color: #155e75; }
+
+.tabs { display:flex; gap:8px; flex-wrap:wrap; }
+.tab { padding: 8px 12px; border-radius: 999px; border: 1px solid var(--ring); background: #f3f4f6; color: var(--ink); cursor: pointer; }
+.tab-active { background: linear-gradient(90deg, var(--brand-start), var(--brand-end)); color: #fff; border-color: transparent; }
+
+/* Gradient CTA button */
+.btn-grad {
+  background: linear-gradient(90deg, var(--brand-start), var(--brand-end));
+  color: #fff; border: none; border-radius: 12px; padding: 10px 14px;
+  cursor: pointer; font-weight: 700; box-shadow: 0 6px 18px rgba(124,58,237,.25);
+}
+.btn-grad:hover { filter: brightness(.97); }
+
+/* Case page hero image */
+.case-hero { border-radius: 16px; overflow: hidden; border: 1px solid var(--ring); margin-bottom: 16px; }
+.case-hero img { width:100%; height:auto; display:block; }
+
+
+body {
+  background:
+    radial-gradient(700px 400px at 20% 0%, #fce7f388, transparent 60%),
+    radial-gradient(800px 500px at 80% 0%, #dbeafe88, transparent 60%),
+    var(--bg);
+  color: var(--ink);
+}
+
+/* Hero heading ribbon (like your site) */
+.section-hero {
+  margin: 6px 0 18px;
+  text-align: center;
+}
+.section-hero h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px;
+  color: #6d28d9;               /* purple title */
+}
+.section-hero p {
+  margin: 0 auto 14px;
+  color: var(--muted);
+  max-width: 60ch;
+}
+.section-underline {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-start), var(--brand-end));
+  margin: 0 auto 10px;
+}
+
+/* Cards – soft, rounded, subtle shadow */
+.card {
+  background: var(--card);
+  border: 1px solid var(--ring);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 18px rgba(17, 24, 39, 0.06);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(17, 24, 39, 0.10);
+}
+
+/* Thumbnail on cards */
+.card-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--ring);
+  margin-bottom: 12px;
+  background: #fafafa;
+}
+.card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Meta + chips */
+.meta { color: var(--muted); }
+.pill {
+  font-size: 12px;
+  color: var(--ink);
+  background: #eef2ff;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.pill-green { background: #dcfce7; color: #065f46; }
+.pill-cyan { background: #cffafe; color: #155e75; }
+
+/* Tabs – pill buttons */
+.tabs { display:flex; gap:8px; flex-wrap:wrap; }
+.tab {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--ring);
+  background: #f3f4f6;
+  color: var(--ink);
+  cursor: pointer;
+}
+.tab-active {
+  background: linear-gradient(90deg, var(--brand-start), var(--brand-end));
+  color: #fff;
+  border-color: transparent;
+}
+
+/* Gradient button like your “Enroll Now” */
+.btn-grad {
+  background: linear-gradient(90deg, var(--brand-start), var(--brand-end));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(124, 58, 237, .25);
+}
+.btn-grad:hover { filter: brightness(.97); }
+
+/* Case hero image on detail page */
+.case-hero {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--ring);
+  margin-bottom: 16px;
+}
+.case-hero img { width:100%; height:auto; display:block; }
+
+/* Make the list page banner heading white (readable on gradient) */
+.brand-hero .brand-heading,
+.section-hero .brand-heading {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #6d28d9 !important; /* purple text like your screenshot */
+  color: #6d28d9 !important;
+}
+/* === SkillNestEdu color override: friendlier text + branded titles === */
+:root{
+  --text-body: #334155;    /* slate-700: easy to read */
+  --text-muted: #64748b;   /* slate-500 */
+  --text-heading: #6d28d9; /* purple-700 (your site vibe) */
+  --link: #7c3aed;         /* purple-600 */
+  --link-hover: #5b21b6;   /* purple-800 */
+}
+
+/* Body text (stop using hard black) */
+body { color: var(--text-body) !important; }
+
+/* Headings: make them purple brand-wide */
+h1, h2, h3, h4 { color: var(--text-heading) !important; }
+
+/* Card titles & section headers */
+.card h3, .card h4 { color: var(--text-heading) !important; }
+
+/* Meta/subtle text */
+.meta { color: var(--text-muted) !important; }
+
+/* Links */
+a { color: var(--link) !important; }
+a:hover { color: var(--link-hover) !important; }
+
+/* If any heading used the old gradient class, force solid brand color */
+.brand-heading{
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--text-heading) !important;
+  color: var(--text-heading) !important;
+}
+
+/* Optional: slightly softer paragraph color inside cards */
+.card p { color: #374151; } /* slate-700 */
+/* Friendlier base text + branded headings */
+:root{
+  --text-body:#334155;       /* slate-700 */
+  --text-muted:#64748b;      /* slate-500 */
+  --text-heading:#6d28d9;    /* purple */
+  --accent:#06b6d4;          /* cyan (Economics), we'll swap dynamically */
+}
+body{ color:var(--text-body) !important; }
+h1,h2,h3,h4{ color:var(--text-heading) !important; }
+.meta{ color:var(--text-muted) !important; }
+
+/* Card section headers with subtle accent underline */
+.card h3{
+  position:relative; padding-bottom:6px;
+}
+.card h3::after{
+  content:""; position:absolute; left:0; bottom:0;
+  width:44px; height:3px; border-radius:999px;
+  background: linear-gradient(90deg, var(--text-heading), var(--accent));
+  opacity:.6;
+}
+
+/* Data table polish */
+.card table { font-size: 14.5px; }
+.card thead th { background:#f8fafc; }
+.card tbody tr:nth-child(even){ background:#fafafa; }
+.card td, .card th { border-bottom:1px solid #eef2f7; }
+
+/* TOK/IA/EE callouts */
+.callout{
+  border-left:4px solid var(--text-heading);
+  background:#faf5ff; /* soft purple bg */
+  padding:12px; border-radius:10px; margin-top:8px;
+}
+
+.blur-protect {
+  filter: blur(5px);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* === SkillNestEdu color override: friendlier text + branded titles === */
+:root{
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-heading: #6d28d9;
+  --link: #7c3aed;
+  --link-hover: #5b21b6;
+}
+body { color: var(--text-body) !important; }
+h1, h2, h3, h4 { color: var(--text-heading) !important; }
+.card h3, .card h4 { color: var(--text-heading) !important; }
+.meta { color: var(--text-muted) !important; }
+a { color: var(--link) !important; }
+a:hover { color: var(--link-hover) !important; }
+.brand-heading{
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--text-heading) !important;
+  color: var(--text-heading) !important;
+}
+.card p { color: #374151; }
+/* Feedback card */
+.ai-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 12px 0;
+}
+.ai-title {
+  background: linear-gradient(90deg, #7c3aed, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+.ai-chip {
+  display: inline-block;
+  font-size: 12px;
+  color: #111827;
+  background: #eef2ff;
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+
+/* Bars */
+.progress { margin-top: 8px; }
+.progress-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7c3aed, #22d3ee);
+  transition: width .4s ease;
+}
+.progress-fill.ok   { background: linear-gradient(90deg, #16a34a, #22c55e); }
+.progress-fill.warn { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.progress-fill.bad  { background: linear-gradient(90deg, #ef4444, #f97316); }
+.progress-label { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+/* Rings */
+.progress-ring.ok   { stroke: #16a34a; }
+.progress-ring.warn { stroke: #f59e0b; }
+.progress-ring.bad  { stroke: #ef4444; }
+@media print {
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .watermark-shell::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("/skillnestlogo.png") repeat;
+    opacity: 0.12;
+    transform: rotate(-18deg) scale(1.15);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+/* --- Pills & badges --- */
+.btn--pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  background: linear-gradient(90deg, #7c3aed, #22d3ee);
+  color: #fff !important;
+  box-shadow: 0 3px 12px rgba(124,58,237,.25);
+}
+.btn--pill:hover { filter: brightness(1.05); }
+
+.btn--outline {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid #8b5cf6;
+  color: #6d28d9 !important;
+}
+.btn--outline:hover { background: rgba(139,92,246,.08); }
+
+.badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.badge--demo { background: #d1fae5; color: #065f46; }   /* mint green */
+.badge--lock { background: #fee2e2; color: #991b1b; }   /* soft red */
+
+/* Card hover lift */
+.case-card { transition: transform .15s ease, box-shadow .15s ease; }
+.case-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(15,23,42,.08); }
+
+/* Reduce background watermark a tiny bit (if you’re using it globally) */
+.watermark-overlay { opacity: .04 !important; }
