@@ -1,5 +1,26 @@
+# node/build
 node_modules/
 dist/
+.vite/
+coverage/
+
+# OS/editor
+.DS_Store
+*.log
+
+# Firebase admin keys / local secrets
+serviceAccount.json
+service-account.json
+*.local.*
 .env
 .env.*
-.DS_Store
+!.env.example  # keep a template in repo
+
+# Bulk scripts output
+backups/
+storage-export
+# local tools & secrets
+skillnest-bulk/serviceAccount.json
+skillnest-migrate/serviceAccount.json
+skillnest-bulk/*.csv
+.firebase/

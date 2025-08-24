@@ -1,32 +1,26 @@
 // src/App.jsx
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
-import HomePage from "./HomePage.jsx";
-import CaseStudyPage from "./CaseStudyPage.jsx";
-
-// NEW: watermark + anti-copy
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+import CaseStudyPage from "./CaseStudyPage";
+import Unlock from "./Unlock";
+import SiteHeader from "./components/SiteHeader.jsx";
 import Watermark from "./components/Watermark.jsx";
 import useAntiCopy from "./hooks/useAntiCopy.js";
+import SignIn from "./pages/SignIn.jsx";
 
 export default function App() {
-  // Enable right-click / hotkey blocking globally
   useAntiCopy();
-
   return (
     <BrowserRouter>
-      {/* Global wrapper so watermark overlays all pages */}
-      <div className="min-h-dvh relative">
-        {/* Persistently render branding + overlays site-wide */}
-        <Watermark diagonalLogo={true} textOverlay={true} />
-
-        {/* Your actual routes */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/case/:id" element={<CaseStudyPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </div>
+    <Watermark /> 
+      <SiteHeader />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/case/:id" element={<CaseStudyPage />} />
+        <Route path="/unlock" element={<Unlock />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
     </BrowserRouter>
   );
 }

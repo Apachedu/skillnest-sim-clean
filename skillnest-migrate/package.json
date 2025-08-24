@@ -1,0 +1,16 @@
+{
+  "name": "skillnest-migrate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^6.1.0",
+    "firebase-admin": "^13.4.0"
+  },
+  "description": ""
+}
